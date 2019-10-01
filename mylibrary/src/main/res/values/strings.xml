@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Library</string>
+
+    <!--Typeface for custom views-->
+    <string name="typeface_open_sans_bold" translatable="false"> OpenSans-Bold.ttf</string>
+    <string name="typeface_open_sans_bold_light" translatable="false"> OpenSans-Light.ttf</string>
+    <string name="typeface_open_sans_regular" translatable="false"> OpenSans-Regular.ttf</string>
+    <string name="typeface_open_sans_semi_bold" translatable="false"> OpenSans-Semibold.ttf</string>
+    <string name="some_thing_went_wrong">Something went wrong. please try again</string>
+</resources>
