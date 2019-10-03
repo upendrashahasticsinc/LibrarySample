@@ -6,6 +6,10 @@
             <enum name="open_sans_semi_bold" value="2" />
             <enum name="open_sans_bold_light" value="3" />
             <enum name="open_sans_bold" value="4" />
+            <enum name="montserrat_bold" value="5" />
+            <enum name="montserrat_medium" value="6" />
+            <enum name="montserrat_regular" value="7" />
+            <enum name="montserrat_semi_bold" value="8" />
         </attr>
         <attr name="custom_input_type" format="enum">
             <enum name="normal" value="0" />

@@ -62,6 +62,18 @@ public class UsTextView extends AppCompatTextView {
                     case 4:
                         fontName = R.string.typeface_open_sans_bold;
                         break;
+                    case 5:
+                        fontName = R.string.typeface_montserrat_bold;
+                        break;
+                    case 6:
+                        fontName = R.string.typeface_montserrat_medium;
+                        break;
+                    case 7:
+                        fontName = R.string.typeface_montserrat_regular;
+                        break;
+                    case 8:
+                        fontName = R.string.typeface_montserrat_semi_bold;
+                        break;
                     default:
                         fontName = R.string.typeface_open_sans_regular;
                 }
