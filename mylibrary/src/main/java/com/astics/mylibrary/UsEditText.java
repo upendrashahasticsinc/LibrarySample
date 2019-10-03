@@ -23,6 +23,7 @@ public class UsEditText extends AppCompatEditText {
     int actionX, actionY, mHeight;
 
     private DrawableClickListener clickListener;
+    private String customFontName;
 
     public UsEditText(Context context) {
         super(context);
@@ -30,28 +31,102 @@ public class UsEditText extends AppCompatEditText {
 
     public UsEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        customAttr(context, attrs);
     }
 
     @SuppressLint("CustomViewStyleable")
     public UsEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        customAttr(context, attrs);
+//        this.setTypeface(Utils.getFont(context, Integer.parseInt(this.getTag().toString())));
+    }
+
+    private void customAttr(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.UsTypeface);
-            String fontName = a.getString(R.styleable.UsTypeface_custom_typeface);
+            int typeface = a.getInt(R.styleable.UsTypeface_custom_typeface, 0);
+            int inputType = a.getInt(R.styleable.UsTypeface_custom_input_type, 0);
+            int fontName;
+            try {
+                switch (typeface) {
+                    case 1:
+                        fontName = R.string.typeface_open_sans_regular;
+                        break;
+                    case 2:
+                        fontName = R.string.typeface_open_sans_semi_bold;
+                        break;
+                    case 3:
+                        fontName = R.string.typeface_open_sans_bold_light;
+                        break;
+                    case 4:
+                        fontName = R.string.typeface_open_sans_bold;
+                        break;
+                    case 5:
+                        fontName = R.string.typeface_montserrat_bold;
+                        break;
+                    case 6:
+                        fontName = R.string.typeface_montserrat_medium;
+                        break;
+                    case 7:
+                        fontName = R.string.typeface_montserrat_regular;
+                        break;
+                    case 8:
+                        fontName = R.string.typeface_montserrat_semi_bold;
+                        break;
+                    default:
+                        fontName = R.string.typeface_open_sans_regular;
+                }
+
+                customFontName = getResources().getString(fontName);
+                Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/" + customFontName);
+                this.setTypeface(myTypeface);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             try {
-                if (fontName != null) {
-                    Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontName);
-                    this.setTypeface(myTypeface);
+                if (this.getText().length() > 0) {
+                    String text = this.getText().toString();
+                    String[] strArray;
+                    StringBuilder builder;
+                    switch (inputType) {
+                        case 0:
+                            this.setText(text);
+                            break;
+                        case 1:
+                            this.setText(text.toLowerCase());
+                            break;
+                        case 2:
+                            this.setText(text.toUpperCase());
+                            break;
+                        case 3:
+                            strArray = text.split(" ");
+                            builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap + " ");
+                            }
+                            this.setText(builder.toString());
+                            break;
+                        case 4:
+                            strArray = text.split("\\. ");
+                            builder = new StringBuilder();
+                            for (String s : strArray) {
+                                String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
+                                builder.append(cap + " ");
+                            }
+                            this.setText(builder.toString());
+                            break;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             a.recycle();
         }
 
-
-//        this.setTypeface(Utils.getFont(context, Integer.parseInt(this.getTag().toString())));
     }
 
     protected void onDraw(Canvas canvas) {
